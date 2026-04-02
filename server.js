@@ -11,6 +11,16 @@ const os = require("os");
 const app = express();
 app.use(cors());
 
+// HEALTH CHECK
+app.get("/", (req, res) => {
+  res.json({
+    status: "ok",
+    message: "Backend service is alive",
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+  });
+});
+
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
